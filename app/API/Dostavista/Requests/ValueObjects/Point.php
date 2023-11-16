@@ -6,7 +6,7 @@ class Point
 {
     public function __construct(
         public ?string $address,
-        public ?ContactPerson $contact_person,
+        public ContactPerson $contact_person,
     )
     {}
 }
