@@ -9,7 +9,7 @@ class CalculateOrderRequest extends Request
 
     public function __construct(
         public string $type,
-        public ?string $matter,
+        public string $matter,
         public int $vehicle_type_id,
         public int $total_weight_kg,
         public ?string $payment_method,
