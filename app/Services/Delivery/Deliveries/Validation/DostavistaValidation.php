@@ -13,7 +13,7 @@ class DostavistaValidation extends BaseValidation
             'matter' => ['required', 'string', 'min:3', 'max:5000'],
             'insurance_amount' => ['required', 'string', 'regex:/^\d+\.\d{2}$/i'],
             'is_motobox_required' => ['required', 'boolean'],
-            'payment_method' => ['required', 'string', 'in:bank_card'],
+            'payment_method' => ['required', 'string', 'in:bank_card,cash'],
             'bank_card_id' => ['required_id:payment_method,bank_card', 'string', 'in:bank_card'],
 
             //from
@@ -25,12 +25,12 @@ class DostavistaValidation extends BaseValidation
             'from.required_start_datetime' => [
                 'required_if:type,standard',
                 'prohibited_if:type,same_day,hyperlocal',
-                'date_format:YYYY-MM-DD'
+                'date'
             ],
             'from.required_finish_datetime' => [
                 'required_if:type,standard',
                 'prohibited_if:type,same_day,hyperlocal',
-                'date_format:YYYY-MM-DD'
+                'date'
             ],
             'from.note' => ['required', 'string', 'min:1', 'max:300'],
             'from.phone' => ['required', 'string', 'regex:/^7\d{10}$/i'],
@@ -43,12 +43,12 @@ class DostavistaValidation extends BaseValidation
             'to.required_start_datetime' => [
                 'required_if:type,standard,same_day',
                 'prohibited_if:type,hyperlocal',
-                'date_format:YYYY-MM-DD'
+                'date'
             ],
             'to.required_finish_datetime' => [
                 'required_if:type,standard,same_day',
                 'prohibited_if:type,hyperlocal',
-                'date_format:YYYY-MM-DD'
+                'date'
             ],
             'to.note' => ['required', 'string', 'min:1', 'max:300'],
             'to.phone' => ['required', 'string', 'regex:/^7\d{10}$/i'],

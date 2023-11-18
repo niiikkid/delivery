@@ -43,8 +43,8 @@ class DostavistaCalculator extends BaseCalculator
                             contact_person: new ContactPerson(
                                 phone: $this->from->phone
                             ),
-                            required_start_datetime: $this->from->required_start_datetime,
-                            required_finish_datetime: $this->from->required_finish_datetime,
+                            required_start_datetime: $this->from->required_start_datetime?->format('c'),
+                            required_finish_datetime: $this->from->required_finish_datetime?->format('c'),
                             note: $this->from->note,
                             entrance_number: $this->from->entrance_number,
                             floor_number: $this->from->floor_number,
@@ -56,8 +56,8 @@ class DostavistaCalculator extends BaseCalculator
                             contact_person: new ContactPerson(
                                 phone: $this->to->phone
                             ),
-                            required_start_datetime: $this->to->required_start_datetime,
-                            required_finish_datetime: $this->to->required_finish_datetime,
+                            required_start_datetime: $this->to->required_start_datetime?->format('c'),
+                            required_finish_datetime: $this->to->required_finish_datetime?->format('c'),
                             note: $this->to->note,
                             entrance_number: $this->to->entrance_number,
                             floor_number: $this->to->floor_number,
