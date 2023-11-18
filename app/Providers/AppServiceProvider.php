@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\API\Dostavista\DostavistaClient;
 use App\API\Dostavista\DostavistaClientInterface;
+use App\Contracts\DeliveryServiceContract;
 use App\Mixins\ResponseMixins;
+use App\Services\Delivery\DeliveryService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
             return new DostavistaClient(
                 config('dostavista.token'),
             );
+        });
+        $this->app->bind(DeliveryServiceContract::class, function () {
+            return new DeliveryService();
         });
     }
 

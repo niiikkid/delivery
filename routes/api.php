@@ -4,6 +4,7 @@ use App\API\Dostavista\DostavistaClientInterface;
 use App\API\Dostavista\Requests\CalculateOrderRequest;
 use App\API\Dostavista\Requests\ValueObjects\ContactPerson;
 use App\API\Dostavista\Requests\ValueObjects\Point;
+use App\Http\Controllers\Api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('delivery/calculate/{deliveryService}', [OrderController::class, 'calculate']);
 
 Route::any('test-calculate', function () {
     $result = make(DostavistaClientInterface::class)
