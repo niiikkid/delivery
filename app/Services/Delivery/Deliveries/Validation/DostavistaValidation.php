@@ -8,13 +8,14 @@ class DostavistaValidation extends BaseValidation
     {
         return [
             'type' => ['required', 'in:standard,same_day,hyperlocal'],
-            'matter' => ['required', 'string', 'min:3', 'max:5000'],
             'vehicle_type_id' => ['required', 'integer', 'in:1,2,3,4,5,6,7'],
             'total_weight_kg' => ['required', 'integer', 'min:0'],
+            'matter' => ['required', 'string', 'min:3', 'max:5000'],
             'insurance_amount' => ['required', 'string', 'regex:/^\d+\.\d{2}$/i'],
             'is_motobox_required' => ['required', 'boolean'],
             'payment_method' => ['required', 'string', 'in:bank_card'],
             'bank_card_id' => ['required_id:payment_method,bank_card', 'string', 'in:bank_card'],
+
             //from
             'from.address' => ['required', 'string', 'min:1', 'max:350'],
             'from.entrance_number' => ['required', 'string', 'min:1', 'max:100'],
