@@ -4,6 +4,7 @@ namespace App\API\Dostavista;
 
 use App\API\Dostavista\Requests\CalculateOrderRequest;
 use App\API\Dostavista\Requests\CreateOrderRequest;
+use App\API\Dostavista\Requests\GetDeliveriesRequest;
 use App\API\Dostavista\Requests\GetOrdersRequest;
 use App\API\Dostavista\Requests\Request;
 
@@ -29,6 +30,11 @@ class DostavistaClient implements DostavistaClientInterface
     }
 
     public function getOrders(GetOrdersRequest $request): array
+    {
+        return $this->doRequest($request);
+    }
+
+    public function getDeliveries(GetDeliveriesRequest $request): array
     {
         return $this->doRequest($request);
     }
