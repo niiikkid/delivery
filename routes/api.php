@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => ['s2s_auth']], function () {
     Route::post('delivery/calculate/{deliveryService}', [OrderController::class, 'calculate']);
+    Route::post('delivery/create/{deliveryService}', [OrderController::class, 'create']);
 });
 
 Route::any('test-create', function () {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Delivery\Deliveries\Calculators;
+namespace App\Services\Delivery\Deliveries\Calculator;
 
 abstract class BaseCalculator
 {
