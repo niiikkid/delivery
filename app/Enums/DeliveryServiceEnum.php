@@ -2,7 +2,12 @@
 
 namespace App\Enums;
 
-enum DeliveryServiceEnum: string
+use App\Contracts\EnumContract;
+use App\Traits\Enumable;
+
+enum DeliveryServiceEnum: string implements EnumContract
 {
+    use Enumable;
+
     case DOSTAVISTA = 'dostavista';
 }

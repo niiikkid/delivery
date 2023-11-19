@@ -6,23 +6,41 @@ use App\API\Dostavista\DostavistaClientInterface;
 use App\API\Dostavista\Requests\CalculateOrderRequest;
 use App\API\Dostavista\Requests\ValueObjects\ContactPerson;
 use App\API\Dostavista\Requests\ValueObjects\Point;
+use App\Http\Requests\Order\CalculateRequest;
 use App\Services\Delivery\ValueObjects\Dostavista\Address;
+use Carbon\Carbon;
 
 class DostavistaCalculator extends BaseCalculator
 {
     public function __construct(
-        public string $type,
-        public string $vehicle_type_id,
-        public string $total_weight_kg,
-        public Address $from,
-        public Address $to,
-        public string $matter,
-        public string $insurance_amount,
-        public bool $is_motobox_required,
-        public string $payment_method,
-        public ?int $bank_card_id = null,
+        protected string $type,
+        protected string $vehicle_type_id,
+        protected string $total_weight_kg,
+        protected Address $from,
+        protected Address $to,
+        protected string $matter,
+        protected string $insurance_amount,
+        protected bool $is_motobox_required,
+        protected string $payment_method,
+        protected ?int $bank_card_id = null,
     )
     {}
+
+    public static function makeFormRequest(CalculateRequest $request): static
+    {
+        return new DostavistaCalculator(
+            type: $request->type,
+            vehicle_type_id: $request->vehicle_type_id,
+            total_weight_kg: $request->total_weight_kg,
+            from: make(Address::class, $request->from),
+            to: make(Address::class, $request->to),
+            matter: $request->matter,
+            insurance_amount: $request->insurance_amount,
+            is_motobox_required: $request->is_motobox_required,
+            payment_method: $request->payment_method,
+            bank_card_id: $request->bank_card_id,
+        );
+    }
 
     public function calc(): array
     {
