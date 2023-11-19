@@ -32,7 +32,7 @@ class DostavistaOrderMaker extends BaseOrderMaker
 
     public function create(): array
     {
-        return make(DostavistaClientInterface::class)
+        $result = make(DostavistaClientInterface::class)
             ->createOrder(
                 new CreateOrderRequest(
                     type: $this->type,
@@ -73,5 +73,7 @@ class DostavistaOrderMaker extends BaseOrderMaker
                     ]
                 )
             );
+
+        return $result['order'];
     }
 }

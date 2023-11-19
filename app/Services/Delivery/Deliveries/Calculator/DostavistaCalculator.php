@@ -32,7 +32,7 @@ class DostavistaCalculator extends BaseCalculator
 
     public function calc(): array
     {
-        return make(DostavistaClientInterface::class)
+        $result = make(DostavistaClientInterface::class)
             ->calculateOrder(
                 new CalculateOrderRequest(
                     type: $this->type,
@@ -73,5 +73,7 @@ class DostavistaCalculator extends BaseCalculator
                     ]
                 )
             );
+
+        return $result['order'];
     }
 }
