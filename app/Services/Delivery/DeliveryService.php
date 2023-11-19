@@ -6,6 +6,7 @@ use App\Contracts\DeliveryServiceContract;
 use App\Enums\DeliveryServiceEnum;
 use App\Services\Delivery\Deliveries\Calculator\BaseCalculator;
 use App\Services\Delivery\Deliveries\OrderMaker\BaseOrderMaker;
+use App\Services\Delivery\Deliveries\StatusProvider\BaseStatusProvider;
 use App\Services\Delivery\Deliveries\Validation\BaseValidation;
 
 class DeliveryService implements DeliveryServiceContract
@@ -18,6 +19,11 @@ class DeliveryService implements DeliveryServiceContract
     public function create(BaseOrderMaker $baseOrderMaker): array
     {
         return $baseOrderMaker->create();
+    }
+
+    public function getStatus(BaseStatusProvider $statusProvider): array
+    {
+        return $statusProvider->get();
     }
 
     public function getValidation(DeliveryServiceEnum $deliveryService): BaseValidation

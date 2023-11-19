@@ -11,6 +11,7 @@ use App\Services\Delivery\Deliveries\Calculator\BaseCalculator;
 use App\Services\Delivery\Deliveries\Calculator\DostavistaCalculator;
 use App\Services\Delivery\Deliveries\OrderMaker\BaseOrderMaker;
 use App\Services\Delivery\Deliveries\OrderMaker\DostavistaOrderMaker;
+use App\Services\Delivery\Deliveries\StatusProvider\DostavistaStatusProvider;
 
 class OrderController extends Controller
 {
@@ -41,6 +42,26 @@ class OrderController extends Controller
 
             $result = make(DeliveryServiceContract::class)
                 ->create($orderMaker);
+
+            return response()->success($result);
+        } catch (\Exception $e) {
+            report($e);
+
+            return response()->fail();
+        }
+    }
+
+    public function get(DeliveryServiceEnum $deliveryService, string $order_id)
+    {
+        try {
+            $statusProvider = match($deliveryService) {
+                $deliveryService => make(DostavistaStatusProvider::class, [
+                    'order_id' => $order_id
+                ])
+            };
+
+            $result = make(DeliveryServiceContract::class)
+                ->getStatus($statusProvider);
 
             return response()->success($result);
         } catch (\Exception $e) {

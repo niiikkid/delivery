@@ -26,45 +26,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['s2s_auth']], function () {
     Route::post('delivery/calculate/{deliveryService}', [OrderController::class, 'calculate']);
     Route::post('delivery/create/{deliveryService}', [OrderController::class, 'create']);
-});
-
-Route::any('test-create', function () {
-    $result = make(DostavistaClientInterface::class)
-        ->calculateOrder(
-            new CalculateOrderRequest(
-                type: 'standard',
-                matter: 'То да сё, разный хлам из кладовки.',
-                vehicle_type_id: 1,
-                total_weight_kg: 100,
-                payment_method: 'cash',
-                points: [
-                    new Point(
-                        address: 'Москва, ул. Покровка, 11',
-                        contact_person: new ContactPerson(
-                            phone: '79020791269',
-                        )
-                    ),
-                    new Point(
-                        address: 'ул. Профсоюзная, 46 к. 1, Москва, 117335',
-                        contact_person: new ContactPerson(
-                            phone: '79020791288',
-                        )
-                    )
-                ],
-            )
-        );
-
-    return response()->success($result);
-});
-
-
-Route::any('test-status', function () {
-    $result = make(DostavistaClientInterface::class)
-        ->getOrders(
-            new \App\API\Dostavista\Requests\GetOrdersRequest(
-                status: 'new'
-            )
-        );
-
-    return response()->success($result);
+    Route::get('delivery/status/{deliveryService}/{order_id}', [OrderController::class, 'get']);
 });
