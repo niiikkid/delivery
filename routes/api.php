@@ -23,7 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('delivery/calculate/{deliveryService}', [OrderController::class, 'calculate']);
+Route::group(['middleware' => ['s2s_auth']], function () {
+    Route::post('delivery/calculate/{deliveryService}', [OrderController::class, 'calculate']);
+});
 
 Route::any('test-create', function () {
     $result = make(DostavistaClientInterface::class)
