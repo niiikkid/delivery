@@ -5,7 +5,7 @@ namespace App\API\Dostavista\Requests;
 class CreateOrderRequest extends Request
 {
     protected $method = 'post';
-    protected $uri = '/calculate-order';
+    protected $uri = '/create-order';
 
     public function __construct(
         public ?string $type = null,

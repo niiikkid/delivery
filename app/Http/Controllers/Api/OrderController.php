@@ -7,9 +7,7 @@ use App\Enums\DeliveryServiceEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\CalculateRequest;
 use App\Http\Requests\Order\CreateRequest;
-use App\Services\Delivery\Deliveries\Calculator\BaseCalculator;
 use App\Services\Delivery\Deliveries\Calculator\DostavistaCalculator;
-use App\Services\Delivery\Deliveries\OrderMaker\BaseOrderMaker;
 use App\Services\Delivery\Deliveries\OrderMaker\DostavistaOrderMaker;
 use App\Services\Delivery\Deliveries\StatusProvider\DostavistaStatusProvider;
 
@@ -35,6 +33,14 @@ class OrderController extends Controller
 
     public function create(CreateRequest $request, DeliveryServiceEnum $deliveryService)
     {
+        $orderMaker = match($deliveryService) {
+            $deliveryService => make(DostavistaOrderMaker::class, $request->all())
+        };
+
+        $result = make(DeliveryServiceContract::class)
+            ->create($orderMaker);
+
+        return response()->success($result);
         try {
             $orderMaker = match($deliveryService) {
                 $deliveryService => make(DostavistaOrderMaker::class, $request->all())
