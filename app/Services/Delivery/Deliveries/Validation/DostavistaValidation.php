@@ -25,12 +25,14 @@ class DostavistaValidation extends BaseValidation
             'from.required_start_datetime' => [
                 'required_if:type,standard',
                 'prohibited_if:type,same_day,hyperlocal',
-                'date_format:Y-m-d\TH:i:sP'
+                'date_format:Y-m-d\TH:i:sP',
+                'after:now'
             ],
             'from.required_finish_datetime' => [
                 'required_if:type,standard',
                 'prohibited_if:type,same_day,hyperlocal',
-                'date_format:Y-m-d\TH:i:sP'
+                'date_format:Y-m-d\TH:i:sP',
+                'after:now'
             ],
             'from.note' => ['required', 'string', 'min:1', 'max:300'],
             'from.phone' => ['required', 'string', 'regex:/^7\d{10}$/i'],
@@ -43,12 +45,14 @@ class DostavistaValidation extends BaseValidation
             'to.required_start_datetime' => [
                 'required_if:type,standard,same_day',
                 'prohibited_if:type,hyperlocal',
-                'date_format:Y-m-d\TH:i:sP'
+                'date_format:Y-m-d\TH:i:sP',
+                'after:now'
             ],
             'to.required_finish_datetime' => [
                 'required_if:type,standard,same_day',
                 'prohibited_if:type,hyperlocal',
-                'date_format:Y-m-d\TH:i:sP'
+                'date_format:Y-m-d\TH:i:sP',
+                'after:now'
             ],
             'to.note' => ['required', 'string', 'min:1', 'max:300'],
             'to.phone' => ['required', 'string', 'regex:/^7\d{10}$/i'],
