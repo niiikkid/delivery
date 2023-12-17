@@ -33,14 +33,6 @@ class OrderController extends Controller
 
     public function create(CreateRequest $request, DeliveryServiceEnum $deliveryService)
     {
-        $orderMaker = match($deliveryService) {
-            $deliveryService => make(DostavistaOrderMaker::class, $request->all())
-        };
-
-        $result = make(DeliveryServiceContract::class)
-            ->create($orderMaker);
-
-        return response()->success($result);
         try {
             $orderMaker = match($deliveryService) {
                 $deliveryService => make(DostavistaOrderMaker::class, $request->all())
