@@ -15,7 +15,7 @@ class DostavistaClient implements DostavistaClientInterface
 
     public function __construct(
         string $token,
-        private string $callback_token,
+        private readonly string $callback_token,
     )
     {
         $this->http = new Http($token);
