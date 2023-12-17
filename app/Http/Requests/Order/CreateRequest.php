@@ -2,14 +2,10 @@
 
 namespace App\Http\Requests\Order;
 
-use App\Contracts\DeliveryServiceContract;
-use App\Services\Delivery\Deliveries\Validation\BaseValidation;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateRequest extends FormRequest
 {
-    protected BaseValidation $deliveryServiceValidation;
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,10 +21,6 @@ class CreateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->deliveryServiceValidation = make(DeliveryServiceContract::class)->getValidation(
-            $this->route('deliveryService')
-        );
-
-        return $this->deliveryServiceValidation->rules();
+        return []; //TODO
     }
 }

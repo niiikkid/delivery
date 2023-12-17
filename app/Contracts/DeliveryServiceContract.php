@@ -3,18 +3,16 @@
 namespace App\Contracts;
 
 use App\Enums\DeliveryServiceEnum;
-use App\Services\Delivery\Deliveries\Calculator\BaseCalculator;
-use App\Services\Delivery\Deliveries\OrderMaker\BaseOrderMaker;
-use App\Services\Delivery\Deliveries\StatusProvider\BaseStatusProvider;
-use App\Services\Delivery\Deliveries\Validation\BaseValidation;
+use App\Models\Delivery;
+use App\Services\Delivery\Orders\BaseOrder;
+use App\Services\Delivery\ValueObjects\DeliveryCalculatedValueObject;
+use Illuminate\Http\Request;
 
 interface DeliveryServiceContract
 {
-    public function calculate(BaseCalculator $calculator): array;
+    public function calculate(BaseOrder $order): DeliveryCalculatedValueObject;
 
-    public function create(BaseOrderMaker $baseOrderMaker): array;
+    public function create(BaseOrder $order): Delivery;
 
-    public function getStatus(BaseStatusProvider $statusProvider): array;
-
-    public function getValidation(DeliveryServiceEnum $deliveryService): BaseValidation;
+    public function handleCallback(Request $request, DeliveryServiceEnum $deliveryService): void;
 }
